@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
@@ -9,25 +9,15 @@ export const AuthProvider = ({ children }) => {
   );
   const [token, setToken] = useState(Cookies.get("token") || null);
 
-  useEffect(() => {
-    if (token) {
-      Cookies.set("token", token, { expires: 7 });
-    } else {
-      Cookies.remove("token");
-    }
-  }, [token]);
-
-  useEffect(() => {
-    if (user) {
-      Cookies.set("user", JSON.stringify(user), { expires: 7 });
-    } else {
-      Cookies.remove("user");
-    }
-  }, [user]);
-
+  // ✅ login: خزن اليوزر + التوكن في state + cookies
   const login = (userData, tokenValue) => {
     setUser(userData);
     setToken(tokenValue);
+
+    Cookies.set("token", tokenValue, { expires: 7 });
+    Cookies.set("user", JSON.stringify(userData), { expires: 7 });
+
+    console.log("✅ Token saved:", tokenValue);
   };
 
   const logout = () => {

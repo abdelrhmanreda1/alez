@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
-import { getData } from "../context/DataContext";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+import { useQuery } from "@tanstack/react-query";
 import Slider from "react-slick";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import Category from "./Category";
 
-const Carousel = () => {
-  const context = getData();
-  const data = context?.data || [];
-  const fetchAllProducts = context?.fetchAllProducts || (() => {});
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, [fetchAllProducts]);
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import api from "../lib/axios";
+
+const Carousel = () => {
+  const fetchSliders = async () => {
+    const res = await api.get("/list-sliders");
+    return res.data;
+  };
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["sliders"],
+    queryFn: fetchSliders,
+  });
+
+  const sliders = data?.data || [];
 
   const SamplePrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -77,9 +84,9 @@ const Carousel = () => {
   return (
     <div>
       <Slider {...settings}>
-        {data?.slice(0, 7)?.map((item, index) => (
+        {sliders.map((item) => (
           <div
-            key={index}
+            key={item.id}
             className="bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] -z-10"
           >
             <div className="flex flex-col md:flex-row gap-10 justify-center h-[600px] my-20 md:my-0 items-center px-4">
@@ -99,7 +106,7 @@ const Carousel = () => {
               </div>
               <div>
                 <img
-                  src={item.image}
+                  src={item.image?.url}
                   alt={item.title}
                   className="rounded-full w-[550px] hover:scale-105 transition-all shadow-2xl shadow-red-400"
                 />

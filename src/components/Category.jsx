@@ -21,9 +21,7 @@ const Category = () => {
     );
   }
 
-  if (isError) {
-    return <p className="text-center text-red-500">Failed to load categories</p>;
-  }
+
 
   return (
     <div className="bg-[#101829] py-7">
@@ -32,14 +30,14 @@ const Category = () => {
           <div
             key={cat.id}
             onClick={() => navigate(`/products/category/${cat.id}`)}
-            className="cursor-pointer flex flex-col items-center bg-white p-4 rounded-lg shadow hover:shadow-lg transition"
+            className="cursor-pointer flex flex-col items-center  bg-gradient-to-r from-[#ff416c]  to-[#9b51e0] p-4 rounded-lg shadow hover:shadow-lg transition"
           >
             <img
               src={cat.images[0]?.url}
               alt={cat.name}
               className="w-20 h-20 object-cover rounded-full mb-3"
             />
-            <h3 className="text-lg font-semibold text-gray-700">{cat.name}</h3>
+            <h3 className="text-lg font-semibold text-white">{cat.name}</h3>
           </div>
         ))}
       </div>

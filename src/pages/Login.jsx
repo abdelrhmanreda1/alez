@@ -6,15 +6,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const { login } = useAuth();
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const mutation = useMutation({
     mutationFn: (formData) => api.post("/login", formData),
     onSuccess: (res) => {
-      const { token, user } = res.data;
-      login(user, token);
+      const { token, user } = res.data; // ✅ هنا الباك بيرجع token + user
+      login(user, token); // نخزنهم في الـ context + cookies
       toast.success("Login successful 🎉");
-        navigate("/");
-
+      navigate("/");
     },
     onError: (err) => {
       console.error(err.response?.data);
@@ -62,7 +62,6 @@ const navigate = useNavigate();
           </button>
         </form>
 
-        {/* 🔗 رابط التحويل للـ Register */}
         <p className="mt-4 text-center text-sm text-gray-600">
           Don’t have an account?{" "}
           <Link to="/register" className="text-red-500 hover:underline">

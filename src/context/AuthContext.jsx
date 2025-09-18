@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
     Cookies.set("token", tokenValue, { expires: 7 });
     Cookies.set("user", JSON.stringify(userData), { expires: 7 });
 
-    console.log("✅ Token saved:", tokenValue);
   };
 
   const logout = () => {

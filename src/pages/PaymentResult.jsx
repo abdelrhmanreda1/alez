@@ -21,6 +21,9 @@ const PaymentResult = () => {
       amount: amount ? amount / 100 : 0,
       orderId,
     });
+
+    // ✅ مسح الـ query params من الـ URL بعد القراءة
+    window.history.replaceState({}, document.title, "/payment-result");
   }, [location.search]);
 
   if (!paymentData) {

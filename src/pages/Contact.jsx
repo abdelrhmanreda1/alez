@@ -43,7 +43,7 @@ const Contact = () => {
     <div className="min-h-screen bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center px-4 py-10">
       <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-10 w-full max-w-5xl">
         <h2 className="text-4xl font-bold text-white text-center mb-10">
-          Get in Touch with <span className="text-red-400">Zaptro</span>
+          Get in Touch with <span className="text-red-400">Alez</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -52,19 +52,18 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-semibold">Contact Info</h3>
               <p className="text-gray-300">
-                Have a question or need support? We're here to help you with
-                your electronics journey.
+           Have a question or need assistance? We're here to help you with your meat needs.
               </p>
             </div>
             <div>
               <p>
-                <strong>📍 Address:</strong> 123 Tech Lane, Kolkata, India
+                <strong>📍 Address:</strong> Meat Market, Shop No-12, Mushrif Mall, Abu Dhabi, U.A.E.
               </p>
               <p>
-                <strong>📧 Email:</strong> support@zaptro.com
+                <strong>📧 Email:</strong> ahmedabub831@gmail.com
               </p>
               <p>
-                <strong>📞 Phone:</strong> +91 98765 43210
+                <strong>📞 Phone:</strong> +9715444204283
               </p>
             </div>
           </div>

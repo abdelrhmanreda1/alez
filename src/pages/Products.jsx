@@ -66,7 +66,7 @@ const Products = () => {
 
   return (
     <div>
-      <div className="w-[80%] mx-auto px-4 mb-10">
+      <div className="w-[84%] mx-auto px-4 mb-10">
         <MobileFilter
           openFilter={openFilter}
           setOpenFilter={setOpenFilter}

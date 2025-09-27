@@ -1,139 +1,89 @@
-import { MapPin } from "lucide-react";
-import React, { useState } from "react";
-import { CgClose } from "react-icons/cg";
-import { FaCaretDown } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
 import { HiMenuAlt1, HiMenuAlt3 } from "react-icons/hi";
-import ResponsiveMenu from "./ResponsiveMenu";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import ResponsiveMenu from "./ResponsiveMenu";
 
-const Navbar = ({ location, getLocation, openDropdown, setOpenDropdown }) => {
+const Navbar = () => {
   const { cartItem } = useCart();
-  const [openNav, setOpenNav] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [openNav, setOpenNav] = useState(false);
 
-  const toggleDropdown = () => {
-    setOpenDropdown(!openDropdown);
-  };
+  const cartCount = Array.isArray(cartItem) ? cartItem.length : 0;
+  const getInitial = (name) => (name ? name.charAt(0).toUpperCase() : "");
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
 
-  // ✅ أول حرف من الاسم
-  const getInitial = (name) => (name ? name.charAt(0).toUpperCase() : "");
-
-  // ✅ إجمالي الكمية في الكارت
-// عدد المنتجات المختلفة
-const cartCount = Array.isArray(cartItem) ? cartItem.length : 0;
-
-
-
   return (
-    <div className="bg-white py-3 shadow-2xl px-4 md:px-0 relative">
-      <div className="w-[84%] mx-auto flex justify-between items-center">
+    <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+      <div className="w-[90%] mx-auto px-4 md:px-8 flex justify-between items-center h-20">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <img
+            src="/mainlogo.webp"
+            alt="alez logo"
+            className="w-14 h-14 object-contain"
+          />
+          <h1 className="font-bold text-2xl md:text-3xl">
+            <span className="text-red-600">Al</span>
+            <span className="text-gray-900">EZ</span>
+          </h1>
+        </Link>
 
-        <div className="flex gap-7 items-center">
-            
-          <Link to={"/"} className="flex justify-center items-center gap-2">
-           <img
-              src="/mainlogo.webp"
-              alt="alez logo"
-              className="w-16 h-16 object-contain "
-            />
-            <h1 className="font-bold text-3xl">
-              <span className="text-red-500 font-serif">A</span>lez
-            </h1>
-           
-          </Link>
-        </div>
-
-        {/* menu section */}
-        <nav className="flex gap-7 items-center">
-          <ul className="md:flex gap-7 items-center text-xl font-semibold hidden">
-            <NavLink
-              to={"/"}
-              className={({ isActive }) =>
-                `${
-                  isActive
-                    ? "border-b-2 transition-all border-red-500"
-                    : "text-black"
-                } cursor-pointer`
-              }
-            >
-              <li>Home</li>
-            </NavLink>
-            <NavLink
-              to={"/products"}
-              className={({ isActive }) =>
-                `${
-                  isActive
-                    ? "border-b-2 transition-all border-red-500"
-                    : "text-black"
-                } cursor-pointer`
-              }
-            >
-              <li>Products</li>
-            </NavLink>
-            <NavLink
-              to={"/about"}
-              className={({ isActive }) =>
-                `${
-                  isActive
-                    ? "border-b-2 transition-all border-red-500"
-                    : "text-black"
-                } cursor-pointer`
-              }
-            >
-              <li>About</li>
-            </NavLink>
-            <NavLink
-              to={"/contact"}
-              className={({ isActive }) =>
-                `${
-                  isActive
-                    ? "border-b-2 transition-all border-red-500"
-                    : "text-black"
-                } cursor-pointer`
-              }
-            >
-              <li>Contact</li>
-            </NavLink>
+        {/* Menu */}
+        <nav className="flex items-center gap-6">
+          <ul className="hidden md:flex gap-6 text-lg font-medium">
+            {["Home", "Products", "About", "Contact"].map((item, i) => (
+              <NavLink
+                key={i}
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className={({ isActive }) =>
+                  `cursor-pointer px-2 py-1 rounded-md transition-all duration-200 ${
+                    isActive
+                      ? "bg-red-600 text-white"
+                      : "text-gray-700 hover:bg-red-50 hover:text-red-600"
+                  }`
+                }
+              >
+                {item}
+              </NavLink>
+            ))}
           </ul>
 
           {/* Cart */}
-          <Link to={"/cart"} className="relative">
-            <IoCartOutline className="h-7 w-7" />
+          <Link to="/cart" className="relative">
+            <IoCartOutline className="h-7 w-7 text-gray-700 hover:text-red-600 transition-colors" />
             {cartCount > 0 && (
-              <span className="bg-red-500 px-2 rounded-full absolute -top-3 -right-3 text-white text-sm">
+              <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
                 {cartCount}
               </span>
             )}
           </Link>
 
-          {/* Auth buttons */}
+          {/* Auth */}
           <div className="hidden md:flex items-center gap-4">
             {!user ? (
               <button
                 onClick={() => navigate("/login")}
-                className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-red-400"
+                className="bg-red-600 text-white px-4 py-2 rounded-md font-medium hover:bg-red-500 transition"
               >
                 Login
               </button>
             ) : (
               <div className="flex items-center gap-3">
-                {/* دايرة فيها أول حرف */}
-                <div className="w-8 h-8 flex items-center justify-center rounded-full bg-red-500 text-white font-bold">
+                <div className="w-9 h-9 flex items-center justify-center rounded-full bg-red-600 text-white font-bold">
                   {getInitial(user?.name)}
                 </div>
-                <span className="font-semibold">{user?.name}</span>
+                <span className="font-medium text-gray-800">{user?.name}</span>
                 <button
                   onClick={handleLogout}
-                  className="bg-gray-700 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-gray-600"
+                  className="bg-red-600 text-white px-4 py-2 rounded-md font-medium hover:bg-red-500 transition"
                 >
                   Logout
                 </button>
@@ -141,22 +91,31 @@ const cartCount = Array.isArray(cartItem) ? cartItem.length : 0;
             )}
           </div>
 
-          {/* Mobile Menu Toggle */}
-          {openNav ? (
-            <HiMenuAlt3
-              onClick={() => setOpenNav(false)}
-              className="h-7 w-7 md:hidden"
-            />
-          ) : (
-            <HiMenuAlt1
-              onClick={() => setOpenNav(true)}
-              className="h-7 w-7 md:hidden"
-            />
-          )}
+          {/* Mobile Toggle */}
+          <div className="md:hidden">
+            {openNav ? (
+              <HiMenuAlt3
+                onClick={() => setOpenNav(false)}
+                className="h-7 w-7 text-gray-700 cursor-pointer"
+              />
+            ) : (
+              <HiMenuAlt1
+                onClick={() => setOpenNav(true)}
+                className="h-7 w-7 text-gray-700 cursor-pointer"
+              />
+            )}
+          </div>
         </nav>
       </div>
-      <ResponsiveMenu openNav={openNav} setOpenNav={setOpenNav} />
-    </div>
+
+      {/* Mobile Menu */}
+      <ResponsiveMenu
+        openNav={openNav}
+        setOpenNav={setOpenNav}
+        handleLogout={handleLogout}
+        user={user}
+      />
+    </header>
   );
 };
 

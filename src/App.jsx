@@ -17,6 +17,10 @@ import ProductDetails from "./pages/ProductDetails";
 import ThankYou from "./pages/ThankYou ";
 import OrderReview from "./pages/OrderReview";
 import PaymentResult from "./pages/PaymentResult";
+import PrivacyPolicy from "./pages/PrivacyPolicy ";
+import RefundPolicy from "./pages/RefundPolicy ";
+import ShippingPolicy from "./pages/ShippingPolicy ";
+import TermsConditions from "./pages/TermsConditions ";
 
 const App = () => {
   const [location, setLocation] = useState();
@@ -77,8 +81,11 @@ const App = () => {
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/order-review" element={<OrderReview />} />
         <Route path="/thank-you" element={<ThankYou />}></Route>
-       <Route path="/payment-result" element={<PaymentResult />} />
-
+        <Route path="/payment-result" element={<PaymentResult />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/shipping-policy" element={<ShippingPolicy />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
 
         <Route
           path="/cart"

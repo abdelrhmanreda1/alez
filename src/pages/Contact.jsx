@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "../lib/axios";
 import { toast } from "react-toastify";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 // ✅ Validation Schema
 const schema = yup.object().shape({
@@ -40,30 +41,35 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center px-4 py-10">
-      <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-10 w-full max-w-5xl">
+    <div className="min-h-screen bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center px-4 py-12">
+      <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-10 w-full max-w-6xl">
         <h2 className="text-4xl font-bold text-white text-center mb-10">
           Get in Touch with <span className="text-red-400">Alez</span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Info Section */}
-          <div className="text-white space-y-6">
+          <div className="text-white space-y-8">
             <div>
               <h3 className="text-2xl font-semibold">Contact Info</h3>
-              <p className="text-gray-300">
-           Have a question or need assistance? We're here to help you with your meat needs.
+              <p className="text-gray-300 mt-2">
+                Have a question or need assistance? We're here to help you with
+                your meat needs.
               </p>
             </div>
-            <div>
-              <p>
-                <strong>📍 Address:</strong> Meat Market, Shop No-12, Mushrif Mall, Abu Dhabi, U.A.E.
+
+            <div className="space-y-4 text-gray-200">
+              <p className="flex items-center gap-3">
+                <MapPin className="text-red-400 w-6 h-6" />
+                Meat Market, Shop No-12, Mushrif Mall, Abu Dhabi, U.A.E.
               </p>
-              <p>
-                <strong>📧 Email:</strong> ahmedabub831@gmail.com
+              <p className="flex items-center gap-3">
+                <Mail className="text-red-400 w-6 h-6" />
+                ahmedabub831@gmail.com
               </p>
-              <p>
-                <strong>📞 Phone:</strong> +9715444204283
+              <p className="flex items-center gap-3">
+                <Phone className="text-red-400 w-6 h-6" />
+                +9715444204283
               </p>
             </div>
           </div>
@@ -76,44 +82,48 @@ const Contact = () => {
                 type="text"
                 {...register("name")}
                 placeholder="John Doe"
-                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-red-400 transition"
               />
               <p className="text-red-400 text-sm">{errors.name?.message}</p>
             </div>
+
             <div>
               <label className="block text-white mb-1">Phone Number</label>
               <input
                 type="text"
                 {...register("phone")}
-                placeholder="01061851679"
-                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="0501234567"
+                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-red-400 transition"
               />
               <p className="text-red-400 text-sm">{errors.phone?.message}</p>
             </div>
+
             <div>
               <label className="block text-white mb-1">Email Address</label>
               <input
                 type="email"
                 {...register("email")}
                 placeholder="john@example.com"
-                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-red-400 transition"
               />
               <p className="text-red-400 text-sm">{errors.email?.message}</p>
             </div>
+
             <div>
               <label className="block text-white mb-1">Your Message</label>
               <textarea
                 rows="4"
                 {...register("message")}
                 placeholder="Type your message..."
-                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-red-400 transition"
               ></textarea>
               <p className="text-red-400 text-sm">{errors.message?.message}</p>
             </div>
+
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full cursor-pointer bg-gradient-to-r from-red-500 to-purple-500 text-white font-semibold py-2 rounded-xl hover:opacity-90 transition-all duration-300"
+              className="w-full cursor-pointer bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold py-3 rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg"
             >
               {isSubmitting ? "Sending..." : "Send Message 🚀"}
             </button>

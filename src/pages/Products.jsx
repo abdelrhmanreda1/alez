@@ -66,7 +66,7 @@ const Products = () => {
 
   return (
     <div>
-      <div className="w-[84%] mx-auto px-4 mb-10">
+      <div className="w-[90%] mx-auto px-4 mb-10">
         <MobileFilter
           openFilter={openFilter}
           setOpenFilter={setOpenFilter}
@@ -94,7 +94,7 @@ const Products = () => {
             />
 
             <div className="flex flex-col justify-center items-center">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-7 mt-10">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-7 mt-10">
                 {filteredData
                   ?.slice(page * 8 - 8, page * 8)
                   .map((product, index) => (

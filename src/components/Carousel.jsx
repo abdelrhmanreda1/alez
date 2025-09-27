@@ -1,9 +1,7 @@
-
 import { useQuery } from "@tanstack/react-query";
 import Slider from "react-slick";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import Category from "./Category";
-
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,65 +13,39 @@ const Carousel = () => {
     return res.data;
   };
 
-  const { data, isLoading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["sliders"],
     queryFn: fetchSliders,
   });
 
   const sliders = data?.data || [];
 
-  const SamplePrevArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        onClick={onClick}
-        className={`arrow ${className}`}
-        style={{ zIndex: 3 }}
-      >
-        <AiOutlineArrowLeft
-          className="arrows"
-          style={{
-            ...style,
-            display: "block",
-            borderRadius: "50px",
-            background: "#f53347",
-            color: "white",
-            position: "absolute",
-            padding: "2px",
-            left: "50px",
-          }}
-        />
-      </div>
-    );
-  };
+  // Prev Arrow
+  const SamplePrevArrow = ({ onClick }) => (
+    <button
+      onClick={onClick}
+      className="absolute left-5 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-300 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white p-2 rounded-full shadow-md transition"
+    >
+      <AiOutlineArrowLeft className="w-5 h-5" />
+    </button>
+  );
 
-  const SampleNextArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div onClick={onClick} className={`arrow ${className}`}>
-        <AiOutlineArrowRight
-          className="arrows"
-          style={{
-            ...style,
-            display: "block",
-            borderRadius: "50px",
-            background: "#f53347",
-            color: "white",
-            position: "absolute",
-            padding: "2px",
-            right: "50px",
-          }}
-        />
-      </div>
-    );
-  };
+  // Next Arrow
+  const SampleNextArrow = ({ onClick }) => (
+    <button
+      onClick={onClick}
+      className="absolute right-5 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-300 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white p-2 rounded-full shadow-md transition"
+    >
+      <AiOutlineArrowRight className="w-5 h-5" />
+    </button>
+  );
 
   const settings = {
-    dots: false,
+    dots: true,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 4000,
     infinite: true,
-    speed: 500,
+    speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: false,
@@ -87,34 +59,39 @@ const Carousel = () => {
         {sliders.map((item) => (
           <div
             key={item.id}
-            className="bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] -z-10"
+            className="bg-gradient-to-r from-red-900 via-gray-900 to-black"
           >
-            <div className="flex flex-col md:flex-row gap-10 justify-center h-[600px] my-20 md:my-0 items-center px-4">
-              <div className="md:space-y-6 space-y-3">
-                <h3 className="text-red-500 font-semibold font-sans text-sm">
-                  Powering Your World with the Best in Electronics
+            <div className="flex flex-col-reverse md:flex-row gap-10 justify-center items-center min-h-[600px] px-6 md:px-12 py-10">
+              {/* Text Section */}
+              <div className="md:space-y-6 space-y-3 max-w-xl text-center md:text-left">
+                <h3 className="text-red-400 font-semibold uppercase text-sm tracking-wide">
+                  Premium Quality
                 </h3>
-                <h1 className="md:text-4xl text-xl font-bold uppercase line-clamp-2 md:line-clamp-3 md:w-[500px] text-white">
+                <h1 className="md:text-5xl text-2xl font-bold uppercase text-white leading-snug">
                   {item.title}
                 </h1>
-                <p className="md:w-[500px] line-clamp-3 text-gray-400 pr-7">
+                <p className="text-gray-300 text-base md:text-lg">
                   {item.description}
                 </p>
-                <button className="bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-2 rounded-md cursor-pointer mt-2">
+                <button className="bg-red-600 hover:bg-red-500 text-white px-6 py-3 rounded-md font-semibold mt-4 transition shadow-lg">
                   Shop Now
                 </button>
               </div>
-              <div>
+
+              {/* Image Section */}
+              <div className="flex justify-center">
                 <img
                   src={item.image?.url}
                   alt={item.title}
-                  className="rounded-full w-[550px] hover:scale-105 transition-all shadow-2xl shadow-red-400"
+                  className="rounded-2xl w-[320px] md:w-[550px] hover:scale-105 transition-transform duration-300 shadow-xl shadow-red-500/30"
                 />
               </div>
             </div>
           </div>
         ))}
       </Slider>
+
+      {/* Categories under slider */}
       <Category />
     </div>
   );

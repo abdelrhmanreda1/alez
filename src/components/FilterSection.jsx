@@ -6,54 +6,73 @@ const FilterSection = ({
   priceRange,
   setPriceRange,
   category,
-  setCategory,
   handleCategoryChange,
-  categories, // 👈 مبعوت من Products.jsx
+  categories,
 }) => {
   return (
-    <div className="bg-gray-100 mt-10 p-4 rounded-md h-max hidden md:block">
-      {/* search */}
-      <input
-        type="text"
-        placeholder="Search.."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="bg-white p-2 rounded-md border-gray-400 border-2 w-full"
-      />
+    <div className="bg-white shadow-md rounded-xl p-6 h-max hidden md:block w-72 border border-gray-200 mt-10">
+      <h2 className="text-xl font-bold text-gray-800 mb-6">Filter Products</h2>
 
-      {/* category filter */}
-      <h1 className="mt-5 font-semibold text-xl">Category</h1>
-      <div className="flex flex-col gap-2 mt-3">
-        <div className="flex gap-2">
-          <input
-            type="radio"
-            name="category"
-            value="All"
-            checked={category === "All"}
-            onChange={handleCategoryChange}
-          />
-          <span className="cursor-pointer">All</span>
-        </div>
-        {categories?.map((item, index) => (
-          <div key={index} className="flex gap-2">
+      {/* Search */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Search
+        </label>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="bg-gray-50 p-2 rounded-md border border-gray-300 w-full focus:ring-2 focus:ring-red-500 focus:outline-none"
+        />
+      </div>
+
+      <hr className="my-6 border-gray-200" />
+
+      {/* Categories */}
+      <div>
+        <h3 className="font-semibold text-lg mb-3 text-gray-800">Category</h3>
+        <div className="flex flex-col gap-2">
+          <label className="flex items-center gap-2 cursor-pointer hover:text-red-600">
             <input
               type="radio"
               name="category"
-              value={item}
-              checked={category === item}
+              value="All"
+              checked={category === "All"}
               onChange={handleCategoryChange}
+              className="text-red-600 focus:ring-red-500"
             />
-            <span className="cursor-pointer capitalize">{item}</span>
-          </div>
-        ))}
+            <span>All</span>
+          </label>
+          {categories?.map((item, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-2 cursor-pointer hover:text-red-600"
+            >
+              <input
+                type="radio"
+                name="category"
+                value={item}
+                checked={category === item}
+                onChange={handleCategoryChange}
+                className="text-red-600 focus:ring-red-500"
+              />
+              <span className="capitalize">{item}</span>
+            </label>
+          ))}
+        </div>
       </div>
 
-      {/* price range */}
-      <h1 className="mt-5 font-semibold text-xl mb-3">Price Range</h1>
-      <div className="flex flex-col gap-2">
-        <label>
-          Price Range: {priceRange[0]} - {priceRange[1]} AED
-        </label>
+      <hr className="my-6 border-gray-200" />
+
+      {/* Price */}
+      <div>
+        <h3 className="font-semibold text-lg mb-3 text-gray-800">
+          Price Range
+        </h3>
+        <p className="text-sm text-gray-600 mb-2">
+          {priceRange[0]} - {priceRange[1]} AED
+        </p>
         <input
           type="range"
           min="0"
@@ -62,13 +81,15 @@ const FilterSection = ({
           onChange={(e) =>
             setPriceRange([priceRange[0], Number(e.target.value)])
           }
-          className="transition-all"
+          className="w-full accent-red-600"
         />
       </div>
 
-      {/* reset */}
+      <hr className="my-6 border-gray-200" />
+
+      {/* Reset */}
       <button
-        className="bg-red-500 text-white rounded-md px-3 py-1 mt-5 cursor-pointer"
+        className="bg-red-600 text-white rounded-md px-4 py-2 w-full font-medium hover:bg-red-700 transition"
         onClick={() => {
           setSearch("");
           setCategory("All");

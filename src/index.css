@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 /* clerk user button adjust */
 
 .cl-avatarBox {
@@ -9,7 +8,7 @@
 }
 
 /* carousel arrow  */
-.arrows{
+.arrows {
   height: 40px;
   width: 40px;
   margin: 1px;
@@ -21,4 +20,46 @@ input {
   accent-color: red;
   border: 1px solid #ccc;
   color: #333;
+}
+
+button {
+  cursor: pointer;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #fa2d37; /* نفس الأحمر */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+/* Hover effect */
+.scroll-to-top:hover {
+  background-color: #d71f28;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Hide by default (لو هتتحكم بالـ JS يظهر بعد Scroll معين) */
+.scroll-to-top.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+.scroll-to-top svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
 }

@@ -13,35 +13,35 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
 
-<QueryClientProvider client={queryClient}>
-    <CartProvider>
-<AuthProvider>
-  <App />
-</AuthProvider>
-        <ScrollToTop
-          color="white"
-          smooth
-          style={{
-            backgroundColor: "#fa2d37",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+// <QueryClientProvider client={queryClient}>
+//     <CartProvider>
+// <AuthProvider>
+//   <App />
+// </AuthProvider>
+//         <ScrollToTop
+//           color="white"
+//           smooth
+//           style={{
+//             backgroundColor: "#fa2d37",
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "center",
+//           }}
+//         />
+//         <ToastContainer
+//           position="bottom-right"
+//           autoClose={5000}
+//           hideProgressBar={false}
+//           newestOnTop={false}
+//           closeOnClick={false}
+//           rtl={false}
+//           pauseOnFocusLoss
+//           draggable
+//           pauseOnHover
+//           theme="light"
+//         />
 
-    </CartProvider>
-  </QueryClientProvider>
+//     </CartProvider>
+//   </QueryClientProvider>
   // </StrictMode>,
 );
